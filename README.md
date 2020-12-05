@@ -21,7 +21,7 @@ Convert multiple images to text quickly and easily
  
  - Run Program (Img_to_TXT.jar)
  
- ![Preview](output.png)
+ ![Preview](preview.png)
  
  ---
  

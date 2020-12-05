@@ -28,6 +28,16 @@ public abstract class Metodos {
 		return systemClipboard;
 	}
 
+	public static void eliminarFichero(String archivo) {
+
+		File fichero = new File(archivo);
+
+		if (fichero.exists() && !fichero.isDirectory()) {
+			fichero.delete();
+		}
+
+	}
+
 	public static void copy(String text) {
 
 		Clipboard clipboard = getSystemClipboard();
@@ -41,7 +51,7 @@ public abstract class Metodos {
 
 			try {
 
-				if (Main.getOs().contentEquals("Linux")) {
+				if (Main.getSeparador().equals("/")) {
 					Runtime.getRuntime().exec("xdg-open " + ruta);
 				}
 

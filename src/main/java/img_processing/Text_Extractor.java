@@ -42,10 +42,6 @@ public class Text_Extractor {
 
 			String commands = "tesseract " + input_file + " " + output_file;
 
-			if (Main.getSeparador().equals("\\")) {
-				commands = "cmd.exe /K " + commands;
-			}
-
 			Metodos.crearFichero(output_file, "", false, true);
 
 			output_file += ".txt";
@@ -60,7 +56,14 @@ public class Text_Extractor {
 
 				out_Text = Read_File.read_TXT_File(output_file).trim();
 
-				Metodos.crearFichero(output_file, "\n" + input_file + "\n \n" + out_Text, false, false);
+				if (out_Text.isEmpty()) {
+					Metodos.eliminarFichero(output_file);
+
+				}
+
+				else {
+					Metodos.crearFichero(output_file, "\n" + input_file + "\n \n" + out_Text, false, false);
+				}
 
 			}
 

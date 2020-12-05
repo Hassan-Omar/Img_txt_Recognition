@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>IMG_2_TXT</groupId>
-  <artifactId>A</artifactId>
+  <artifactId>IMG_2_TXT</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <description>A</description>
+  <description>IMG_2_TXT</description>
 </project>

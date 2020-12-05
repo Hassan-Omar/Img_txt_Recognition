@@ -80,6 +80,7 @@ public class Main extends javax.swing.JFrame {
 		jScrollPane1 = new javax.swing.JScrollPane();
 
 		view = new javax.swing.JTextArea();
+		view.setFont(new Font("Dialog", Font.PLAIN, 16));
 		view.setWrapStyleWord(true);
 		view.setLineWrap(true);
 

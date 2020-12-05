@@ -27,10 +27,12 @@ Convert multiple images to text quickly and easily
  
  ## Input & Output 
  
- input 
+ - Input 
+ 
  ![Preview](https://user-images.githubusercontent.com/49106965/60827289-b8c17b00-a164-11e9-97af-74ef89f8fd29.png)
 
- output
+ - Output
+ 
  ![Preview](output.png)
 
  ---

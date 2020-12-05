@@ -1,55 +1,76 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package img_processing;
 
-/**
- *
- * @author h.omar
- */
-import java.io.PrintWriter;
+import java.io.IOException;
+import java.util.LinkedList;
+
+import principal.Main;
+import utils.Metodos;
 
 /**
  *
  * this class to extract the text from image it create another process and give
  * a commands for CMD to run Tesseract-OCR
  */
+
 public class Text_Extractor {
 
-// method to get the text which is recognized
-    public static String get_Text(String imageName) {
-        
-        
-        String out_Text = null; // hold the value of output 
-        String input_file = "C:\\Program Files (x86)\\Tesseract-OCR\\"+imageName;
-        String output_file = "C:\\Users\\h.omar\\Documents\\TR_LTA\\OUT\\1";
-        String tesseract_install_path = "C:\\Program Files (x86)\\Tesseract-OCR\\tesseract";
-        // array of commands which we will pass to the command 
-        String[] commands
-                = {
-                    "cmd",};
-        // define process "this to run cmd "
-        Process p;
-        try {
-            p = Runtime.getRuntime().exec(commands);
-            new Thread(new SyncPipe(p.getErrorStream(), System.err)).start();
-            new Thread(new SyncPipe(p.getInputStream(), System.out)).start();
-            PrintWriter stdin = new PrintWriter(p.getOutputStream());
-            stdin.println("\"" + tesseract_install_path + "\" \"" + input_file + "\" \"" + output_file + "\" -l eng");
-            stdin.close();
-            p.waitFor();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println(Read_File.read_TXT_File(output_file + ".txt"));
-            out_Text = Read_File.read_TXT_File(output_file + ".txt");
+	public static String get_Text(String input, int modo) throws IOException {
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return out_Text;
-    }
+		String out_Text = "";
+
+		String output_file, input_file;
+
+		LinkedList<String> listaImagenes = new LinkedList<String>();
+
+		if (modo == 1) {
+			listaImagenes.add(input);
+		}
+
+		else {
+
+			listaImagenes = Metodos.directorio(Main.getRuta().getText() + Main.getSeparador(), ".", true, true);
+		}
+
+		for (int i = 0; i < listaImagenes.size(); i++) {
+
+			input_file = listaImagenes.get(i);
+
+			output_file = input_file.substring(0, input_file.lastIndexOf(Main.getSeparador()) + 1) + "output"
+
+					+ input_file.substring(input_file.lastIndexOf(Main.getSeparador()), input_file.lastIndexOf("."));
+
+			String commands = "tesseract " + input_file + " " + output_file;
+
+			if (Main.getSeparador().equals("\\")) {
+				commands = "cmd.exe /K " + commands;
+			}
+
+			Metodos.crearFichero(output_file, "", false, true);
+
+			output_file += ".txt";
+
+			Process p;
+
+			try {
+
+				p = Runtime.getRuntime().exec(commands);
+
+				p.waitFor();
+
+				out_Text = Read_File.read_TXT_File(output_file).trim();
+
+				Metodos.crearFichero(output_file, "\n" + input_file + "\n \n" + out_Text, false, false);
+
+			}
+
+			catch (Exception e) {
+
+			}
+
+		}
+
+		return out_Text;
+
+	}
 }
